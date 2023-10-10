@@ -91,15 +91,26 @@ def respond(sock):
 
     parts = request.split()
     if len(parts) > 1 and parts[0] == "GET":
-        transmit(STATUS_OK, sock)
-        transmit(CAT, sock)
+        print(parts[1] + "\n" + parts[2] + "\n" + parts[0])
+        if(('..') in parts[1] or '~' in parts[1]):
+                transmit(STATUS_FORBIDDEN, sock)
+        else: 
+            try:
+                transmit(STATUS_OK, sock)
+                open("pages" + parts[1])
+                print("transmitted")
+            except FileNotFoundError:
+                transmit(STATUS_NOT_FOUND, sock)
+        #transmit(STATUS_OK, sock)
+        #transform these lines into if statements
+        #transmit(CAT, sock)
     else:
         log.info("Unhandled request: {}".format(request))
         transmit(STATUS_NOT_IMPLEMENTED, sock)
         transmit("\nI don't handle this request: {}\n".format(request), sock)
-
-    sock.shutdown(socket.SHUT_RDWR)
-    sock.close()
+        sock.shutdown(socket.SHUT_RDWR)
+        sock.close()
+    print("returning")
     return
 
 

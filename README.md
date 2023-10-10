@@ -1,3 +1,11 @@
+Name: Joseph Mock
+email: joeymock@uoregon.edu
+Description: this project makes a python server that should be able to display stored files, respond correctly when the file doesn't exist, and prohibit prohibited characters
+
+
+
+
+
 # UOCIS322 - Project 1 #
 
 This project will get you started with creating a simple webpage server.
